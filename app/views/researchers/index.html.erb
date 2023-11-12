@@ -1,0 +1,38 @@
+<h2>Lista de Pesquisadores</h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Nome</th>
+    <th>Telefone</th>
+    <th>Campo acadêmico</th>
+    <th>Currículo</th>
+    <th>ID-ORCID</th>
+    <th>Título</th>
+    <th>Email</th>
+    <th>Status</th>
+    <th>Ação</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @researchers.each do |researchers| %>
+    <tr>
+      <td><%= researchers.name %></td>
+      <td><%= researchers.phone_number %></td>
+      <td><%= researchers.academic_field %></td>
+      <td><%= researchers.cv_link %></td>
+      <td><%= researchers.orcid_id %></td>
+      <td><%= researchers.academic_title %></td>
+      <td><%= researchers.user.email %></td>
+      <td><%= researchers.user.active? ? 'Ativo' : 'Inativo' %></td>
+      <td>
+        <% if researchers.user.active? %>
+          <%= button_to "Desativar", deactivate_researcher_path(researchers), method: :patch %>
+        <% else %>
+          <%= button_to "Ativar", activate_researcher_path(researchers), method: :patch %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

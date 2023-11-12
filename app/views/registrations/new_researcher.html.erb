@@ -1,0 +1,56 @@
+<h2>Cadastro de Pesquisador</h2>
+
+<% if @user.errors.any? %>
+  <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for(@user, url: create_researcher_registration_path) do |f| %>
+  <div>
+    <%= f.fields_for :researcher do |researcher_fields| %>
+      <div>
+        <%= researcher_fields.label :name %>
+        <%= researcher_fields.text_field :name %>
+      </div>
+      <div>
+        <%= researcher_fields.label :phone_number %>
+        <%= researcher_fields.text_field :phone_number %>
+      </div>
+      <div>
+        <%= researcher_fields.label :academic_field %>
+        <%= researcher_fields.text_field :academic_field %>
+      </div>
+      <div>
+        <%= researcher_fields.label :cv_link %>
+        <%= researcher_fields.text_field :cv_link %>
+      </div>
+      <div>
+        <%= researcher_fields.label :orcid_id %>
+        <%= researcher_fields.text_field :orcid_id %>
+      </div>
+      <div>
+        <%= researcher_fields.label :academic_title %>
+        <%= researcher_fields.text_field :academic_title %>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <div>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div>
+    <%= f.submit 'Cadastrar' %>
+  </div>
+<% end %>

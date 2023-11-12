@@ -1,0 +1,32 @@
+<h2>Lista de Coordenadores</h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Nome</th>
+    <th>Telefone</th>
+    <th>Campo acadêmico</th>
+    <th>Email</th>
+    <th>Status</th>
+    <th>Ação</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @coordinators.each do |coordinator| %>
+    <tr>
+      <td><%= coordinator.name %></td>
+      <td><%= coordinator.phone_number %></td>
+      <td><%= coordinator.academic_field %></td>
+      <td><%= coordinator.user.email %></td>
+      <td><%= coordinator.user.active? ? 'Ativo' : 'Inativo' %></td>
+      <td>
+        <% if coordinator.user.active? %>
+          <%= button_to "Desativar", deactivate_coordinator_path(coordinator), method: :patch %>
+        <% else %>
+          <%= button_to "Ativar", activate_coordinator_path(coordinator), method: :patch %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

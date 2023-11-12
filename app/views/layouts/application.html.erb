@@ -11,10 +11,31 @@
 </head>
 
 <body>
-<div>
-    <% notice %>
-    <% alert %>
-</div>
-<%= yield %>
+<header>
+  <%= link_to root_path do %>
+    <h1>Página inicial</h1>
+  <% end %>
+  <nav>
+    <% if user_signed_in? %>
+      <% if current_user.role == 'supervisor' %>
+        <%= link_to 'Cadastrar coordenador', new_coordinator_registration_path %>
+        <%= link_to 'Visualizar coordenadores', coordinators_path %>
+        <%= link_to 'Cadastrar pesquisador', new_researcher_registration_path %>
+        <%= link_to 'Visualizar pesquisadores', researchers_path %>
+      <% end %>
+
+      <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to 'Entrar', new_user_session_path %>
+    <% end %>
+  </nav>
+</header>
+<main>
+  <div>
+    <%= notice %>
+    <%= alert %>
+  </div>
+  <%= yield %>
+</main>
 </body>
 </html>

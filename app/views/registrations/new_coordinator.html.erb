@@ -1,0 +1,46 @@
+<h2>Cadastro de Coordenador</h2>
+
+<% if @user.errors.any? %>
+  <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for(@user, url: create_coordinator_registration_path) do |f| %>
+  <div>
+    <%= f.fields_for :coordinator do |coordinator_fields| %>
+      <div>
+        <%= coordinator_fields.label :name %>
+        <%= coordinator_fields.text_field :name %>
+      </div>
+
+      <div>
+        <%= coordinator_fields.label :phone_number %>
+        <%= coordinator_fields.text_field :phone_number %>
+      </div>
+
+      <div>
+        <%= coordinator_fields.label :academic_field %>
+        <%= coordinator_fields.text_field :academic_field %>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <div>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div>
+    <%= f.submit 'Cadastrar' %>
+  </div>
+<% end %>
