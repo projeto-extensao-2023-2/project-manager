@@ -36,9 +36,16 @@ class ProjectsController < ApplicationController
   def search
     @query = params["query"]
 
+    @projects = Project.where(supervisor: current_user.supervisor)
+
+    if current_user.coordinator?
+      @projects = Project.where(coordinator: current_user.coordinator)
+    elsif current_user.researcher?
+      @projects = Project.where(researcher: current_user.researcher)
+    end
+
     if @query.present?
       @projects = Project.joins(:student)
-                         .where(researcher: current_user.researcher)
                          .where("LOWER(projects.ric_number) LIKE ? OR LOWER(projects.project_title) LIKE ? OR LOWER(students.name) LIKE ?",
                                 "%#{@query.downcase}%", "%#{@query.downcase}%", "%#{@query.downcase}%")
                          .order(project_status: :asc, created_at: :desc)
