@@ -13,7 +13,6 @@
   <br/>
 </div>
 
-
 <div>
   <h3>Dados do projeto</h3>
 
@@ -66,4 +65,10 @@
   <br/>
 </div>
 
-<%= link_to 'Voltar', researcher_projects_path %>
+<% if current_user.supervisor? %>
+  <p><%= link_to "Voltar", supervisor_projects_path %></p>
+<% elsif current_user.coordinator? %>
+  <p><%= link_to "Voltar", coordinator_projects_path %></p>
+<% elsif current_user.researcher? %>
+  <p><%= link_to "Voltar", researcher_projects_path %></p>
+<% end %>

@@ -18,7 +18,19 @@ Rails.application.routes.draw do
 
   get 'coordinators', to: 'supervisors#index_coordinator', as: :coordinators
   get 'researchers', to: 'supervisors#index_researcher', as: :researchers
-  resources :coordinators, only: [:show, :edit, :update]
+
+  resources :supervisors, only: [] do
+    resources :projects, only: [:index, :show] do
+      get "search", on: :collection
+    end
+  end
+
+  resources :coordinators, only: [:show, :edit, :update] do
+    resources :projects, only: [:index, :show, :edit, :update] do
+      get "search", on: :collection
+    end
+  end
+
   resources :researchers, only: [:show, :edit, :update] do
     resources :projects, only: [:index, :show, :new, :create] do
       get "search", on: :collection

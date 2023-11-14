@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
-  before_action :authorize_researcher
+  before_action :authorize_access_view, only: [:index, :show, :search]
+  before_action :authorize_researcher_create, only: [:new, :create]
+  before_action :authorize_coordinator_update, only: []
 
   def index
     @projects = filtered_projects
@@ -26,7 +28,7 @@ class ProjectsController < ApplicationController
       return redirect_to root_path, notice: 'Projeto cadastrado com sucesso.'
     end
 
-    @coordinators = Coordinator.all
+    @coordinators = Coordinator.joins(:user).where(users: { active: true })
     flash.now.alert = 'Não foi possível cadastrar o projeto'
     render :new, status: :unprocessable_entity
   end
@@ -83,24 +85,44 @@ class ProjectsController < ApplicationController
     )
   end
 
-  def authorize_researcher
-    unless current_user&.researcher? && current_user&.active? || current_user&.supervisor? && current_user&.active?
+  def authorize_access_view
+    unless current_user&.researcher? && current_user&.active? || current_user&.coordinator? && current_user&.active? || current_user&.supervisor? && current_user&.active?
+      redirect_to root_path, alert: 'Acesso não autorizado'
+    end
+  end
+
+  def authorize_researcher_create
+    unless current_user&.researcher? && current_user&.active?
+      redirect_to root_path, alert: 'Acesso não autorizado'
+    end
+  end
+
+  def authorize_coordinator_update
+    unless current_user&.coordinator? && current_user&.active?
       redirect_to root_path, alert: 'Acesso não autorizado'
     end
   end
 
   def filtered_projects
-    if params[:status].present? && Project.project_statuses.include?(params[:status])
-      projects = Project.where(researcher: current_user.researcher, project_status: params[:status])
+    projects = Project.where(supervisor: current_user.supervisor)
 
+    if current_user.coordinator?
+      projects = Project.where(coordinator: current_user.coordinator)
+    elsif current_user.researcher?
+      projects = Project.where(researcher: current_user.researcher)
+    end
+
+    if params[:status].present? && Project.project_statuses.include?(params[:status])
       case params[:status]
       when 'aprovado', 'interrompido'
-        projects.order(feedback_date: :desc, project_status: :asc)
+        projects = projects.where(project_status: params[:status]).order(feedback_date: :desc, project_status: :asc)
       else
-        projects.order(project_status: :asc, created_at: :desc)
+        projects = projects.where(project_status: params[:status]).order(project_status: :asc, created_at: :desc)
       end
     else
-      Project.where(researcher: current_user.researcher).order(project_status: :asc, created_at: :desc)
+      projects = projects.order(project_status: :asc, created_at: :desc)
     end
+
+    projects
   end
 end

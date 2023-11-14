@@ -28,6 +28,15 @@
 
       <% if current_user.role == 'coordinator' %>
         Olá <%= current_user.coordinator.name %>
+        <%= link_to 'Visualizar projetos', coordinator_projects_path(current_user.coordinator) %>
+
+        <%= form_with url: search_coordinator_projects_path(current_user.coordinator), method: :get do |f| %>
+          <div class="input-group">
+            <%= f.text_field :query, placeholder: 'Buscar projeto' %>
+            <%= f.submit 'Buscar' %>
+          </div>
+        <% end %>
+
         <%= link_to 'Perfil', coordinator_path(current_user.coordinator) %>
       <% end %>
 
