@@ -12,19 +12,34 @@
 
 <body>
 <header>
-  <%= link_to root_path do %>
-    <h1>Página inicial</h1>
-  <% end %>
   <nav>
+    <%= link_to root_path do %>
+      <h1>Página inicial</h1>
+    <% end %>
+
     <% if user_signed_in? %>
       <% if current_user.role == 'supervisor' %>
+        Olá <%= current_user.supervisor.name %>
         <%= link_to 'Cadastrar coordenador', new_coordinator_registration_path %>
         <%= link_to 'Visualizar coordenadores', coordinators_path %>
         <%= link_to 'Cadastrar pesquisador', new_researcher_registration_path %>
         <%= link_to 'Visualizar pesquisadores', researchers_path %>
       <% end %>
 
-      <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+      <% if current_user.role == 'coordinator' %>
+        Olá <%= current_user.coordinator.name %>
+        <%= link_to 'Perfil', coordinator_path(current_user.coordinator.id) %>
+      <% end %>
+
+      <% if current_user.role == 'researcher' %>
+        Olá <%= current_user.researcher.name %>
+        <%= link_to 'Perfil', researcher_path(current_user.researcher.id) %>
+      <% end %>
+
+      <div>
+        <br />
+        <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+      </div>
     <% else %>
       <%= link_to 'Entrar', new_user_session_path %>
     <% end %>

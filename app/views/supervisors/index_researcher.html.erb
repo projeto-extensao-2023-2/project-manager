@@ -1,0 +1,32 @@
+<h2>Lista de Pesquisadores</h2>
+
+<table>
+  <thead>
+  <tr>
+    <th><%= Researcher.human_attribute_name("name") %></th>
+    <th><%= User.human_attribute_name("email") %></th>
+    <th>Status</th>
+    <th>Ação</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @researchers.each do |researcher| %>
+    <tr>
+      <td><%= researcher.name %></td>
+      <td><%= researcher.user.email %></td>
+      <td><%= researcher.user.active? ? 'Ativo' : 'Inativo' %></td>
+      <td>
+        <%= link_to "Visualizar dados", researcher_path(researcher) %>
+        <% if researcher.user.active? %>
+          <%= button_to "Desativar", deactivate_researcher_path(researcher), method: :patch %>
+        <% else %>
+          <%= button_to "Ativar", activate_researcher_path(researcher), method: :patch %>
+        <% end %>
+        <br />
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Voltar', root_path %>

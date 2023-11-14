@@ -1,0 +1,36 @@
+<h1>Dados do perfil</h1>
+
+<div>
+  <p><strong><%= Researcher.human_attribute_name("name") %>: </strong> <%= @researcher.name %></p>
+</div>
+<div>
+  <p><strong><%= Researcher.human_attribute_name("phone_number") %>: </strong> <%= @researcher.phone_number %></p>
+</div>
+<div>
+  <p><strong><%= Researcher.human_attribute_name("academic_field") %>: </strong> <%= @researcher.academic_field %></p>
+</div>
+<div>
+  <p><strong><%= Researcher.human_attribute_name("cv_link") %>: </strong> <%= @researcher.cv_link %></p>
+</div>
+<div>
+  <p><strong><%= Researcher.human_attribute_name("orcid_id") %>: </strong> <%= @researcher.orcid_id %></p>
+</div>
+<div>
+  <p><strong><%= Researcher.human_attribute_name("academic_title") %>: </strong> <%= @researcher.academic_title %></p>
+</div>
+<div>
+  <p><strong><%= Researcher.human_attribute_name("email") %>: </strong> <%= @researcher.user.email %></p>
+</div>
+<div>
+  <p><strong><%= Address.model_name.human %>: </strong> <%= @researcher.address.street %>, <%= @researcher.address.district %>,
+    <%= @researcher.address.complement %>, <%= @researcher.address.city %>-<%= @researcher.address.state %>,
+    <%= @researcher.address.postal_code %></p>
+</div>
+
+<%= link_to 'Editar', edit_researcher_path(@researcher) %>
+
+<% if current_user.role == 'supervisor' %>
+  <%= link_to 'Voltar', researchers_path %>
+<% else %>
+  <%= link_to 'Voltar', root_path %>
+<% end %>

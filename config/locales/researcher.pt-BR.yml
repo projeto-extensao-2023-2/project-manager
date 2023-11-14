@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      researcher:
+        one: 'Pesquisador'
+        other: 'Pesquisadores'
+    attributes:
+      researcher:
+        name: 'Nome'
+        phone_number: 'Telefone'
+        academic_field: 'Campo acadêmico'
+        cv_link: 'Link do currículo'
+        orcid_id: 'ID-ORCID'
+        academic_title: 'Título acadêmico'

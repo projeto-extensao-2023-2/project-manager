@@ -14,9 +14,10 @@ Rails.application.routes.draw do
     patch 'registrations/:id/deactivate_researcher', to: 'registrations#deactivate_researcher', as: :deactivate_researcher
   end
 
-  resources :coordinators, only: [:index]
-  resources :researchers, only: [:index]
-
+  get 'coordinators', to: 'supervisors#index_coordinator', as: :coordinators
+  get 'researchers', to: 'supervisors#index_researcher', as: :researchers
+  resources :coordinators, only: [:show, :edit, :update]
+  resources :researchers, only: [:show, :edit, :update]
 
   root "home#index"
 

@@ -1,0 +1,35 @@
+pt-BR:
+  activerecord:
+    models:
+      address:
+        one: 'Endereço'
+        other: 'Endereços'
+    attributes:
+      user/supervisor/address:
+        street: 'Rua'
+        district: 'Bairro'
+        complement: 'Complemento'
+        city: 'Cidade'
+        state: 'Estado'
+        postal_code: 'CEP'
+      user/coordinator/address:
+        street: 'Rua'
+        district: 'Bairro'
+        complement: 'Complemento'
+        city: 'Cidade'
+        state: 'Estado'
+        postal_code: 'CEP'
+      user/researcher/address:
+        street: 'Rua'
+        district: 'Bairro'
+        complement: 'Complemento'
+        city: 'Cidade'
+        state: 'Estado'
+        postal_code: 'CEP'
+      address:
+        street: 'Rua'
+        district: 'Bairro'
+        complement: 'Complemento'
+        city: 'Cidade'
+        state: 'Estado'
+        postal_code: 'CEP'

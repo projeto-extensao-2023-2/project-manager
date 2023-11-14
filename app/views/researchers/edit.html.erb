@@ -1,0 +1,70 @@
+<h1>Editar perfil</h1>
+
+<% if @researcher.errors.any? %>
+  <p>Verifique os erros abaixo:</p>
+  <ul>
+    <% @researcher.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @researcher do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :phone_number %>
+    <%= f.text_field :phone_number %>
+  </div>
+  <div>
+    <%= f.label :academic_field %>
+    <%= f.text_field :academic_field %>
+  </div>
+  <div>
+    <%= f.label :cv_link %>
+    <%= f.text_field :cv_link %>
+  </div>
+  <div>
+    <%= f.label :orcid_id %>
+    <%= f.text_field :orcid_id %>
+  </div>
+  <div>
+    <%= f.label :academic_title %>
+    <%= f.text_field :academic_title %>
+  </div>
+
+  <%= f.fields_for :address do |address_fields| %>
+    <div>
+      <%= address_fields.label :street %>
+      <%= address_fields.text_field :street %>
+    </div>
+    <div>
+      <%= address_fields.label :district %>
+      <%= address_fields.text_field :district %>
+    </div>
+    <div>
+      <%= address_fields.label :complement %>
+      <%= address_fields.text_field :complement %>
+    </div>
+    <div>
+      <%= address_fields.label :postal_code %>
+      <%= address_fields.text_field :postal_code %>
+    </div>
+    <div>
+      <%= address_fields.label :city %>
+      <%= address_fields.text_field :city %>
+    </div>
+    <div>
+      <%= address_fields.label :state %>
+      <%= address_fields.text_field :state %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.submit 'Salvar alterações' %>
+
+    <%= link_to 'Voltar', researcher_path(@researcher) %>
+  </div>
+<% end %>

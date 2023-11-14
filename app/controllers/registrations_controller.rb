@@ -5,7 +5,8 @@ class RegistrationsController < Devise::RegistrationsController
 
   def new_coordinator
     @user = User.new
-    @user.build_coordinator
+    coordinator = @user.build_coordinator
+    coordinator.build_address
   end
 
   def create_coordinator
@@ -23,7 +24,8 @@ class RegistrationsController < Devise::RegistrationsController
 
   def new_researcher
     @user = User.new
-    @user.build_researcher
+    researcher = @user.build_researcher
+    researcher.build_address
   end
 
   def create_researcher
@@ -82,10 +84,31 @@ class RegistrationsController < Devise::RegistrationsController
       coordinator_attributes: [
         :name,
         :phone_number,
-        :academic_field
+        :academic_field,
+        address_attributes: [
+          :street,
+          :district,
+          :complement,
+          :postal_code,
+          :city,
+          :state
+        ]
       ],
       researcher_attributes: [
-        :name, :phone_number, :academic_field, :cv_link, :orcid_id, :academic_title
+        :name,
+        :phone_number,
+        :academic_field,
+        :cv_link,
+        :orcid_id,
+        :academic_title,
+        address_attributes: [
+          :street,
+          :district,
+          :complement,
+          :postal_code,
+          :city,
+          :state
+        ]
       ]
     )
   end

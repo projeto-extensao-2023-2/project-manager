@@ -10,10 +10,6 @@ class User < ApplicationRecord
     researcher: 3
   }
 
-  def supervisor?
-    role == 'supervisor'
-  end
-
   has_one :supervisor, dependent: :destroy
   has_one :coordinator, dependent: :destroy
   has_one :researcher, dependent: :destroy
@@ -21,6 +17,10 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :researcher
 
   after_create :create_supervisor
+
+  def supervisor?
+    role == 'supervisor'
+  end
 
   private
   def create_supervisor

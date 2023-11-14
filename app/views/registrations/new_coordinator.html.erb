@@ -25,6 +25,33 @@
         <%= coordinator_fields.label :academic_field %>
         <%= coordinator_fields.text_field :academic_field %>
       </div>
+
+      <%= coordinator_fields.fields_for :address do |address_fields| %>
+        <div>
+          <%= address_fields.label :street %>
+          <%= address_fields.text_field :street %>
+        </div>
+        <div>
+          <%= address_fields.label :district %>
+          <%= address_fields.text_field :district %>
+        </div>
+        <div>
+          <%= address_fields.label :complement %>
+          <%= address_fields.text_field :complement %>
+        </div>
+        <div>
+          <%= address_fields.label :postal_code %>
+          <%= address_fields.text_field :postal_code %>
+        </div>
+        <div>
+          <%= address_fields.label :city %>
+          <%= address_fields.text_field :city %>
+        </div>
+        <div>
+          <%= address_fields.label :state %>
+          <%= address_fields.text_field :state %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 

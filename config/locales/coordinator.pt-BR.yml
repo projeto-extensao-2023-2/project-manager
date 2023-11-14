@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      coordinator:
+        one: 'Coordenador'
+        other: 'Coordenadores'
+    attributes:
+      coordinator:
+        name: 'Nome'
+        phone_number: 'Telefone'
+        academic_field: 'Campo acadêmico'
