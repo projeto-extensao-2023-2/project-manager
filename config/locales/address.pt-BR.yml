@@ -26,6 +26,13 @@ pt-BR:
         city: 'Cidade'
         state: 'Estado'
         postal_code: 'CEP'
+      project/student/address:
+        street: 'Rua'
+        district: 'Bairro'
+        complement: 'Complemento'
+        city: 'Cidade'
+        state: 'Estado'
+        postal_code: 'CEP'
       address:
         street: 'Rua'
         district: 'Bairro'

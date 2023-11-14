@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_14_113903) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_14_134358) do
   create_table "addresses", force: :cascade do |t|
     t.string "street"
     t.string "district"
@@ -23,8 +23,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_14_113903) do
     t.integer "researcher_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "student_id"
     t.index ["coordinator_id"], name: "index_addresses_on_coordinator_id"
     t.index ["researcher_id"], name: "index_addresses_on_researcher_id"
+    t.index ["student_id"], name: "index_addresses_on_student_id"
     t.index ["supervisor_id"], name: "index_addresses_on_supervisor_id"
   end
 
@@ -49,8 +51,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_14_113903) do
     t.string "project_title"
     t.text "project_summary"
     t.text "key_words"
-    t.integer "project_status"
-    t.text "anotation", default: ""
+    t.integer "project_status", default: 0
+    t.text "annotation", default: ""
     t.date "feedback_date"
     t.integer "researcher_id", null: false
     t.integer "coordinator_id", null: false
@@ -71,6 +73,24 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_14_113903) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_researchers_on_user_id"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "name"
+    t.string "social_security_number"
+    t.string "identity_card_number"
+    t.date "birth_date"
+    t.string "phone_number"
+    t.string "email"
+    t.string "academic_field"
+    t.string "course"
+    t.integer "semester"
+    t.boolean "has_subject_dependencies"
+    t.boolean "is_regular_student"
+    t.integer "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_students_on_project_id"
   end
 
   create_table "supervisors", force: :cascade do |t|
@@ -97,10 +117,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_14_113903) do
 
   add_foreign_key "addresses", "coordinators"
   add_foreign_key "addresses", "researchers"
+  add_foreign_key "addresses", "students"
   add_foreign_key "addresses", "supervisors"
   add_foreign_key "coordinators", "users"
   add_foreign_key "projects", "coordinators"
   add_foreign_key "projects", "researchers"
   add_foreign_key "researchers", "users"
+  add_foreign_key "students", "projects"
   add_foreign_key "supervisors", "users"
 end

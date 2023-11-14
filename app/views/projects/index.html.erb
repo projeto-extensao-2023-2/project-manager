@@ -1,0 +1,34 @@
+<h2>Lista de Projetos</h2>
+
+<div>
+  <%= link_to 'Todos', researcher_projects_path(status: 'todos') %>
+  <%= link_to 'Em análise', researcher_projects_path(status: 'em_analise') %>
+  <%= link_to 'Aprovado', researcher_projects_path(status: 'aprovado') %>
+  <%= link_to 'Interrompido', researcher_projects_path(status: 'interrompido') %>
+</div>
+<br/>
+
+<div class="project-cards">
+  <% @projects.each do |project| %>
+    <div class="project-card">
+      <p><strong><%= Project.human_attribute_name("created_at") %>:
+      </strong> <%= project.created_at.strftime("%d/%m/%Y") %></p>
+
+      <p><strong><%= Project.human_attribute_name("ric_number") %>:</strong> <%= project.ric_number %></p>
+
+      <p><strong><%= Project.human_attribute_name("project_title") %>:</strong> <%= project.project_title %></p>
+
+      <p><strong>Responsável:</strong> <%= project.student.name %></p>
+
+      <p><strong><%= Project.human_attribute_name("project_status") %>:
+      </strong> <%= Project.human_attribute_name("project_status.#{project.project_status}") %></p>
+
+      <% if project.project_status != 'em_analise' %>
+        <p><strong><%= Project.human_attribute_name("feedback_date") %>:</strong> <%= project.feedback_date %></p>
+      <% end %>
+
+      <p><%= link_to "Visualizar dados", researcher_project_path(project.researcher, project) %></p>
+      <br/>
+    </div>
+  <% end %>
+</div>

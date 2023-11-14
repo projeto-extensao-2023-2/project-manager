@@ -1,0 +1,19 @@
+pt-BR:
+  activerecord:
+    models:
+      student:
+        one: 'Orientando'
+        other: 'Orientandos'
+    attributes:
+      student:
+        name: 'Nome'
+        social_security_number: 'CPF'
+        identity_card_number: 'RG'
+        birth_date: 'Data de nascimento'
+        phone_number: 'Telefone'
+        email: 'E-mail'
+        academic_field: 'Campo acadêmico'
+        course: 'Curso'
+        semester: 'Semestre'
+        has_subject_dependencies: 'Possui pendência de disciplinas'
+        is_regular_student: 'É um aluno regular'

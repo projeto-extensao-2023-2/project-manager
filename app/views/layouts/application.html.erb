@@ -28,12 +28,22 @@
 
       <% if current_user.role == 'coordinator' %>
         Olá <%= current_user.coordinator.name %>
-        <%= link_to 'Perfil', coordinator_path(current_user.coordinator.id) %>
+        <%= link_to 'Perfil', coordinator_path(current_user.coordinator) %>
       <% end %>
 
       <% if current_user.role == 'researcher' %>
         Olá <%= current_user.researcher.name %>
-        <%= link_to 'Perfil', researcher_path(current_user.researcher.id) %>
+        <%= link_to 'Cadastrar novo projeto', new_researcher_project_path(current_user.researcher) %>
+        <%= link_to 'Visualizar projetos', researcher_projects_path(current_user.researcher) %>
+
+        <%= form_with url: search_researcher_projects_path(current_user.researcher), method: :get do |f| %>
+          <div class="input-group">
+            <%= f.text_field :query, placeholder: 'Buscar projeto' %>
+            <%= f.submit 'Buscar' %>
+          </div>
+        <% end %>
+
+        <%= link_to 'Perfil', researcher_path(current_user.researcher) %>
       <% end %>
 
       <div>

@@ -1,0 +1,69 @@
+<h2>VISUALIZAÇÃO DA SUBMISSÃO DO PROJETO</h2>
+
+<div>
+  <h3>Validação do projeto</h3> <!-- DEVE SER UM CAMPO DE TEXTO -->
+
+  <p><strong><%= Project.human_attribute_name("project_status") %>
+    :</strong> <%= Project.human_attribute_name("project_status.#{@project.project_status}") %></p>
+
+  <% if @project.project_status != 'em_analise' %>
+    <p><strong><%= Project.human_attribute_name("annotation") %>:</strong> <%= @project.annotation %></p>
+  <% end %>
+
+  <br/>
+</div>
+
+
+<div>
+  <h3>Dados do projeto</h3>
+
+  <p><strong><%= Researcher.model_name.human %>:</strong> <%= @project.researcher.name %></p>
+  <p><strong><%= Project.human_attribute_name("project_type") %>:</strong> <%= @project.project_type %></p>
+  <p><strong><%= Project.human_attribute_name("institution") %>:</strong> <%= @project.institution %></p>
+  <p><strong><%= Project.human_attribute_name("course") %>:</strong> <%= @project.course %></p>
+  <p><strong><%= Project.human_attribute_name("study_area") %>:</strong> <%= @project.study_area %></p>
+  <p><strong><%= Project.human_attribute_name("research_line") %>:</strong> <%= @project.research_line %></p>
+  <p><strong><%= Project.human_attribute_name("ods") %>:</strong> <%= @project.ods %></p>
+  <p><strong><%= Project.human_attribute_name("project_title") %>:</strong> <%= @project.project_title %></p>
+  <p><strong><%= Project.human_attribute_name("project_summary") %>:</strong> <%= @project.project_summary %></p>
+  <p><strong><%= Project.human_attribute_name("key_words") %>:</strong> <%= @project.key_words %></p>
+  <p><strong><%= Coordinator.model_name.human %>:</strong> <%= @project.coordinator.name %></p>
+  <br/>
+</div>
+
+<div>
+  <h3>Dados do Orientando</h3>
+
+  <p><strong><%= Student.human_attribute_name("name") %>:</strong> <%= @project.student.name %></p>
+  <p><strong><%= Student.human_attribute_name("social_security_number") %>
+    :</strong> <%= @project.student.social_security_number %></p>
+  <p><strong><%= Student.human_attribute_name("identity_card_number") %>
+    :</strong> <%= @project.student.identity_card_number %></p>
+  <p><strong><%= Student.human_attribute_name("birth_date") %>:</strong> <%= @project.student.birth_date %></p>
+  <p><strong><%= Student.human_attribute_name("phone_number") %>:</strong> <%= @project.student.phone_number %></p>
+  <p><strong><%= Student.human_attribute_name("email") %>:</strong> <%= @project.student.email %></p>
+  <p><strong><%= Student.human_attribute_name("academic_field") %>:</strong> <%= @project.student.academic_field %></p>
+  <p><strong><%= Student.human_attribute_name("course") %>:</strong> <%= @project.student.course %></p>
+  <p><strong><%= Student.human_attribute_name("semester") %>:</strong> <%= @project.student.semester %></p>
+  <p><strong><%= Student.human_attribute_name("has_subject_dependencies") %>
+    :</strong> <%= @project.student.has_subject_dependencies ? 'Sim' : 'Não' %>
+  </p>
+  <p><strong><%= Student.human_attribute_name("is_regular_student") %>
+    :</strong> <%= @project.student.is_regular_student ? 'Sim' : 'Não' %></p>
+  <br/>
+</div>
+
+<div>
+  <h3>Endereço do Orientando</h3>
+
+  <p><strong><%= Address.human_attribute_name("street") %>:</strong> <%= @project.student.address.street %></p>
+  <p><strong><%= Address.human_attribute_name("district") %>:</strong> <%= @project.student.address.district %></p>
+  <p><strong><%= Address.human_attribute_name("complement") %>:</strong> <%= @project.student.address.complement %></p>
+  <p><strong><%= Address.human_attribute_name("postal_code") %>:</strong> <%= @project.student.address.postal_code %>
+  </p>
+  <p><strong><%= Address.human_attribute_name("city") %>:</strong> <%= @project.student.address.city %></p>
+  <p><strong><%= Address.human_attribute_name("state") %>:</strong> <%= @project.student.address.state %></p>
+  <br/>
+</div>
+
+<%= link_to 'Voltar', researcher_projects_path %>

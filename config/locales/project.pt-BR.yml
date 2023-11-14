@@ -1,0 +1,24 @@
+pt-BR:
+  activerecord:
+    models:
+      project:
+        one: 'Projeto'
+        other: 'Projetos'
+    attributes:
+      project:
+        coordinator_id: 'Coordenador'
+        coordinator: 'Coordenador'
+        ric_number: 'RIC Nº'
+        project_type: 'Tipo de projeto'
+        institution: 'Instituição'
+        course: 'Curso'
+        study_area: 'Área de estudo'
+        research_line: 'Linha de pesquisa'
+        ods: 'ODS'
+        project_title: 'Título do projeto'
+        project_summary: 'Resumo do projeto'
+        key_words: 'Palavras chaves'
+        project_status: 'Status do projeto'
+        annotation: 'Anotações'
+        feedback_date: 'Data do retorno'
+        created_at: 'Data de submissão'

@@ -11,7 +11,7 @@ class CreateProjects < ActiveRecord::Migration[7.1]
       t.string :project_title
       t.text :project_summary
       t.text :key_words
-      t.integer :project_status
+      t.integer :project_status, default: 0
       t.text :anotation, default: ""
       t.date :feedback_date
       t.references :researcher, null: false, foreign_key: true

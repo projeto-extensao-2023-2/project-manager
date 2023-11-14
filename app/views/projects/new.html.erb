@@ -1,0 +1,132 @@
+<h2>Cadastro de projeto</h2>
+
+<% if @project.errors.any? %>
+  <ul>
+    <% @project.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for [@researcher, @project] do |f| %>
+  <div>
+    <%= f.label :coordinator_id %>
+    <%= f.collection_select :coordinator_id, @coordinators, :id, :name %>
+  </div>
+  <div>
+    <%= f.label :project_type %>
+    <%= f.collection_select :project_type, Project.project_types, :first, :first %>
+  </div>
+  <div>
+    <%= f.label :institution %>
+    <%= f.text_field :institution %>
+  </div>
+  <div>
+    <%= f.label :course %>
+    <%= f.text_field :course %>
+  </div>
+  <div>
+    <%= f.label :study_area %>
+    <%= f.text_field :study_area %>
+  </div>
+  <div>
+    <%= f.label :research_line %>
+    <%= f.text_field :research_line %>
+  </div>
+  <div>
+    <%= f.label :ods %>
+    <%= f.text_area :ods %>
+  </div>
+  <div>
+    <%= f.label :project_title %>
+    <%= f.text_field :project_title %>
+  </div>
+  <div>
+    <%= f.label :project_summary %>
+    <%= f.text_area :project_summary %>
+  </div>
+  <div>
+    <%= f.label :key_words %>
+    <%= f.text_area :key_words %>
+  </div>
+
+  <h3>Dados do orientando</h3>
+
+  <%= f.fields_for :student do |student_field| %>
+    <div>
+      <%= student_field.label :name %>
+      <%= student_field.text_field :name %>
+    </div>
+    <div>
+      <%= student_field.label :social_security_number %>
+      <%= student_field.text_field :social_security_number %>
+    </div>
+    <div>
+      <%= student_field.label :identity_card_number %>
+      <%= student_field.text_field :identity_card_number %>
+    </div>
+    <div>
+      <%= student_field.label :birth_date %>
+      <%= student_field.date_field :birth_date %>
+    </div>
+    <div>
+      <%= student_field.label :phone_number %>
+      <%= student_field.text_field :phone_number %>
+    </div>
+    <div>
+      <%= student_field.label :email %>
+      <%= student_field.text_field :email %>
+    </div>
+    <div>
+      <%= student_field.label :academic_field %>
+      <%= student_field.text_field :academic_field %>
+    </div>
+    <div>
+      <%= student_field.label :course %>
+      <%= student_field.text_field :course %>
+    </div>
+    <div>
+      <%= student_field.label :semester %>
+      <%= student_field.number_field :semester %>
+    </div>
+    <div>
+      <%= student_field.label :has_subject_dependencies %>
+      <%= student_field.check_box :has_subject_dependencies %>
+    </div>
+    <div>
+      <%= student_field.label :is_regular_student %>
+      <%= student_field.check_box :is_regular_student %>
+    </div>
+
+    <%= student_field.fields_for :address do |address_fields| %>
+      <div>
+        <%= address_fields.label :street %>
+        <%= address_fields.text_field :street %>
+      </div>
+      <div>
+        <%= address_fields.label :district %>
+        <%= address_fields.text_field :district %>
+      </div>
+      <div>
+        <%= address_fields.label :complement %>
+        <%= address_fields.text_field :complement %>
+      </div>
+      <div>
+        <%= address_fields.label :postal_code %>
+        <%= address_fields.text_field :postal_code %>
+      </div>
+      <div>
+        <%= address_fields.label :city %>
+        <%= address_fields.text_field :city %>
+      </div>
+      <div>
+        <%= address_fields.label :state %>
+        <%= address_fields.text_field :state %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div>
+    <%= f.submit 'Realizar cadastro' %>
+  </div>
+<% end %>
