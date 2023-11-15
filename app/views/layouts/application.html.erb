@@ -24,6 +24,15 @@
         <%= link_to 'Visualizar coordenadores', coordinators_path %>
         <%= link_to 'Cadastrar pesquisador', new_researcher_registration_path %>
         <%= link_to 'Visualizar pesquisadores', researchers_path %>
+
+        <%= link_to 'Visualizar projetos', supervisor_projects_path(current_user.supervisor) %>
+
+        <%= form_with url: search_supervisor_projects_path, method: :get do |f| %>
+          <div class="input-group">
+            <%= f.text_field :query, placeholder: 'Buscar projeto' %>
+            <%= f.submit 'Buscar' %>
+          </div>
+        <% end %>
       <% end %>
 
       <% if current_user.role == 'coordinator' %>

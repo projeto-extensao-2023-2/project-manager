@@ -36,12 +36,15 @@
       <p><strong><%= Project.human_attribute_name("project_status") %>:
       </strong> <%= Project.human_attribute_name("project_status.#{project.project_status}") %></p>
 
-      <% if project.project_status != 'em_analise' %>
-        <p><strong><%= Project.human_attribute_name("feedback_date") %>:</strong> <%= project.feedback_date %></p>
+      <% if project.project_status != 'em_analise' && project.feedback_date.present? %>
+        <p><strong><%= Project.human_attribute_name("feedback_date") %>:
+        </strong> <%= project.feedback_date.strftime("%d/%m/%Y") %></p>
+
+        <p><strong><%= Project.human_attribute_name("annotation") %>:</strong> <%= project.annotation %></p>
       <% end %>
 
       <% if current_user.supervisor? %>
-        <p><%= link_to "Detalhes", supervisor_project_path(project.supervisor, project) %></p>
+        <p><%= link_to "Detalhes", supervisor_project_path(project) %></p>
       <% elsif current_user.coordinator? %>
         <p><%= link_to "Detalhes", coordinator_project_path(project.coordinator, project) %></p>
       <% elsif current_user.researcher? %>

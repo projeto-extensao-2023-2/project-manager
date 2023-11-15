@@ -19,11 +19,9 @@ Rails.application.routes.draw do
   get 'coordinators', to: 'supervisors#index_coordinator', as: :coordinators
   get 'researchers', to: 'supervisors#index_researcher', as: :researchers
 
-  resources :supervisors, only: [] do
-    resources :projects, only: [:index, :show] do
-      get "search", on: :collection
-    end
-  end
+  get 'supervisor/projects', to: 'supervisors#index_project', as: :supervisor_projects
+  get 'supervisor/project/:id', to: 'supervisors#show_project', as: :supervisor_project
+  get 'supervisor/projects/search', to: 'supervisors#search_project', as: :search_supervisor_projects
 
   resources :coordinators, only: [:show, :edit, :update] do
     resources :projects, only: [:index, :show, :edit, :update] do

@@ -22,6 +22,13 @@ class Project < ApplicationRecord
 
   private
   def generate_ric_number
+    puts ""
+    puts ""
+    puts ""
+    puts "TESTEEEE"
+    puts ""
+    puts ""
+    puts ""
     loop do
       ric = SecureRandom.random_number(9_999_999_999 - 1_000_000_000) + 1_000_000_000
       unless Project.exists?(ric_number: ric)
