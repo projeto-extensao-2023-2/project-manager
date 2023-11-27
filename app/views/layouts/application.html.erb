@@ -130,6 +130,8 @@
 
             <!-- Coordinator Links -->
             <% if current_user.role == 'coordinator' %>
+              <%= link_to 'Editais', notices_path, class: "nav-link" %>
+
               <%= link_to 'Visualizar Projetos', coordinator_projects_path(current_user.coordinator), class: "nav-link" %>
 
               <%= form_with url: search_coordinator_projects_path(current_user.coordinator), method: :get, class: "nav-form" do |f| %>

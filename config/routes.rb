@@ -35,4 +35,6 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :notices, only: [:index, :new, :create, :edit, :update, :destroy]
+
 end

@@ -1,0 +1,29 @@
+<h1> Lista de editais </h1>
+
+<%= link_to 'Criar novo edital', new_notice_path %>
+
+<% if @notices.any? %>
+  <table class="table table-bordered mt-3">
+    <thead>
+    <tr>
+      <th><%= Notice.human_attribute_name("name") %></th>
+      <th><%= Notice.human_attribute_name("start_date") %></th>
+      <th><%= Notice.human_attribute_name("end_date") %></th>
+      <th colspan="2">Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @notices.each do |notice| %>
+      <tr>
+        <td><%= notice.name %></td>
+        <td><%= notice.start_date.strftime("%d/%m/%Y") %></td>
+        <td><%= notice.end_date.strftime("%d/%m/%Y") %></td>
+        <td><%= link_to "Editar", edit_notice_path(notice), class: "btn btn-warning btn-sm" %></td>
+        <td><%= button_to("Excluir", notice_path(notice), method: :delete, class: "btn btn-danger btn-sm") %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Nenhum edital cadastrado.</p>
+<% end %>
