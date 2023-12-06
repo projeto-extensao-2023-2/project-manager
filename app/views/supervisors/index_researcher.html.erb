@@ -1,32 +1,33 @@
-<h2>Lista de Pesquisadores</h2>
+<div class="cute-container">
+  <h2>Lista de Pesquisadores</h2>
 
-<table>
-  <thead>
-  <tr>
-    <th><%= Researcher.human_attribute_name("name") %></th>
-    <th><%= User.human_attribute_name("email") %></th>
-    <th>Status</th>
-    <th>Ação</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @researchers.each do |researcher| %>
-    <tr>
-      <td><%= researcher.name %></td>
-      <td><%= researcher.user.email %></td>
-      <td><%= researcher.user.active? ? 'Ativo' : 'Inativo' %></td>
-      <td>
-        <%= link_to "Visualizar dados", researcher_path(researcher) %>
-        <% if researcher.user.active? %>
-          <%= button_to "Desativar", deactivate_researcher_path(researcher), method: :patch %>
-        <% else %>
-          <%= button_to "Ativar", activate_researcher_path(researcher), method: :patch %>
-        <% end %>
-        <br />
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th><%= Researcher.human_attribute_name("name") %></th>
+        <th><%= User.human_attribute_name("email") %></th>
+        <th>Status</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @researchers.each do |researcher| %>
+        <tr>
+          <td><%= researcher.name %></td>
+          <td><%= researcher.user.email %></td>
+          <td><%= researcher.user.active? ? 'Ativo' : 'Inativo' %></td>
+          <td>
+            <%= link_to "Visualizar dados", researcher_path(researcher), class: "btn btn-info btn-sm" %>
+            <% if researcher.user.active? %>
+              <%= button_to "Desativar", deactivate_researcher_path(researcher), method: :patch, class: "btn btn-danger btn-sm", data: { confirm: 'Tem certeza?' } %>
+            <% else %>
+              <%= button_to "Ativar", activate_researcher_path(researcher), method: :patch, class: "btn btn-success btn-sm" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'Voltar', root_path %>
+  <%= link_to 'Voltar', root_path, class: "btn btn-secondary" %>
+</div>

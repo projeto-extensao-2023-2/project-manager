@@ -1,13 +1,13 @@
 <h3>AVALIAR PROJETO Nº <%= @project.ric_number %></h3>
 
-<%= form_with model: [@coordinator, @project], method: :patch do |form| %>
-  <div class="mb-3">
+<%= form_with model: [@coordinator, @project], method: :patch, html: { class: 'mb-3' } do |form| %>
+  <div class="form-group">
     <%= form.label :annotation, Project.human_attribute_name("annotation") %>
     <%= form.text_area :annotation, class: 'form-control', required: true %>
   </div>
 
-  <div class="mb-3">
-    <%= form.submit 'Aprovar' %>
-    <%= form.submit 'Interromper', name: 'interrupt_button' %>
+  <div class="form-group">
+    <%= form.submit 'Aprovar', class: 'btn btn-success' %>
+    <%= form.submit 'Interromper', name: 'interrupt_button', class: 'btn btn-danger' %>
   </div>
 <% end %>

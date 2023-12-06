@@ -1,56 +1,52 @@
-<h2>Lista de Projetos</h2>
+<div class="cute-container">
+  <h2>Lista de Projetos</h2>
 
-<div>
-  <% user = current_user %>
-  <% if current_user.supervisor? %>
-    <%= link_to 'Todos', supervisor_projects_path(user.supervisor.id, status: 'todos') %>
-    <%= link_to 'Em análise', supervisor_projects_path(user.supervisor.id, status: 'em_analise') %>
-    <%= link_to 'Aprovado', supervisor_projects_path(user.supervisor.id, status: 'aprovado') %>
-    <%= link_to 'Interrompido', supervisor_projects_path(user.supervisor.id, status: 'interrompido') %>
-  <% elsif current_user.coordinator? %>
-    <%= link_to 'Todos', coordinator_projects_path(user.coordinator.id, status: 'todos') %>
-    <%= link_to 'Em análise', coordinator_projects_path(user.coordinator.id, status: 'em_analise') %>
-    <%= link_to 'Aprovado', coordinator_projects_path(user.coordinator.id, status: 'aprovado') %>
-    <%= link_to 'Interrompido', coordinator_projects_path(user.coordinator.id, status: 'interrompido') %>
-  <% elsif current_user.researcher? %>
-    <%= link_to 'Todos', researcher_projects_path(user.researcher.id, status: 'todos') %>
-    <%= link_to 'Em análise', researcher_projects_path(user.researcher.id, status: 'em_analise') %>
-    <%= link_to 'Aprovado', researcher_projects_path(user.researcher.id, status: 'aprovado') %>
-    <%= link_to 'Interrompido', researcher_projects_path(user.researcher.id, status: 'interrompido') %>
-  <% end %>
-</div>
-<br/>
+  <div class="project-filters">
+    <% user = current_user %>
+    <% if current_user.supervisor? %>
+      <%= link_to 'Todos', supervisor_projects_path(user.supervisor.id, status: 'todos'), class: 'project-filter' %>
+      <%= link_to 'Em análise', supervisor_projects_path(user.supervisor.id, status: 'em_analise'), class: 'project-filter' %>
+      <%= link_to 'Aprovado', supervisor_projects_path(user.supervisor.id, status: 'aprovado'), class: 'project-filter' %>
+      <%= link_to 'Interrompido', supervisor_projects_path(user.supervisor.id, status: 'interrompido'), class: 'project-filter' %>
+    <% elsif current_user.coordinator? %>
+      <%= link_to 'Todos', coordinator_projects_path(user.coordinator.id, status: 'todos'), class: 'project-filter' %>
+      <%= link_to 'Em análise', coordinator_projects_path(user.coordinator.id, status: 'em_analise'), class: 'project-filter' %>
+      <%= link_to 'Aprovado', coordinator_projects_path(user.coordinator.id, status: 'aprovado'), class: 'project-filter' %>
+      <%= link_to 'Interrompido', coordinator_projects_path(user.coordinator.id, status: 'interrompido'), class: 'project-filter' %>
+    <% elsif current_user.researcher? %>
+      <%= link_to 'Todos', researcher_projects_path(user.researcher.id, status: 'todos'), class: 'project-filter' %>
+      <%= link_to 'Em análise', researcher_projects_path(user.researcher.id, status: 'em_analise'), class: 'project-filter' %>
+      <%= link_to 'Aprovado', researcher_projects_path(user.researcher.id, status: 'aprovado'), class: 'project-filter' %>
+      <%= link_to 'Interrompido', researcher_projects_path(user.researcher.id, status: 'interrompido'), class: 'project-filter' %>
+    <% end %>
+  </div>
+  <br/>
 
-<div class="project-cards">
-  <% @projects.each do |project| %>
-    <div class="project-card">
-      <p><strong><%= Project.human_attribute_name("created_at") %>:
-      </strong> <%= project.created_at.strftime("%d/%m/%Y") %></p>
+  <div class="project-cards">
+    <% @projects.each do |project| %>
+      <div class="project-card">
+        <p><strong><%= Project.human_attribute_name("created_at") %>:</strong> <%= project.created_at.strftime("%d/%m/%Y") %></p>
+        <p><strong><%= Project.human_attribute_name("ric_number") %>:</strong> <%= project.ric_number %></p>
+        <p><strong><%= Project.human_attribute_name("project_title") %>:</strong> <%= project.project_title %></p>
+        <p><strong>Responsável:</strong> <%= project.student.name %></p>
+        <p><strong><%= Project.human_attribute_name("project_status") %>:
+        </strong> <%= Project.human_attribute_name("project_status.#{project.project_status}") %></p>
 
-      <p><strong><%= Project.human_attribute_name("ric_number") %>:</strong> <%= project.ric_number %></p>
+        <% if project.project_status != 'em_analise' && project.feedback_date.present? %>
+          <p><strong><%= Project.human_attribute_name("feedback_date") %>:
+          </strong> <%= project.feedback_date.strftime("%d/%m/%Y") %></p>
+          <p><strong><%= Project.human_attribute_name("annotation") %>:</strong> <%= project.annotation %></p>
+        <% end %>
 
-      <p><strong><%= Project.human_attribute_name("project_title") %>:</strong> <%= project.project_title %></p>
-
-      <p><strong>Responsável:</strong> <%= project.student.name %></p>
-
-      <p><strong><%= Project.human_attribute_name("project_status") %>:
-      </strong> <%= Project.human_attribute_name("project_status.#{project.project_status}") %></p>
-
-      <% if project.project_status != 'em_analise' && project.feedback_date.present? %>
-        <p><strong><%= Project.human_attribute_name("feedback_date") %>:
-        </strong> <%= project.feedback_date.strftime("%d/%m/%Y") %></p>
-
-        <p><strong><%= Project.human_attribute_name("annotation") %>:</strong> <%= project.annotation %></p>
-      <% end %>
-
-      <% if current_user.supervisor? %>
-        <p><%= link_to "Detalhes", supervisor_project_path(project) %></p>
-      <% elsif current_user.coordinator? %>
-        <p><%= link_to "Detalhes", coordinator_project_path(project.coordinator, project) %></p>
-      <% elsif current_user.researcher? %>
-        <p><%= link_to "Detalhes", researcher_project_path(project.researcher, project) %></p>
-      <% end %>
-      <br/>
-    </div>
-  <% end %>
+        <% if current_user.supervisor? %>
+          <%= link_to "Detalhes", supervisor_project_path(project), class: 'btn btn-primary btn-sm' %>
+        <% elsif current_user.coordinator? %>
+          <%= link_to "Detalhes", coordinator_project_path(project.coordinator, project), class: 'btn btn-primary btn-sm' %>
+        <% elsif current_user.researcher? %>
+          <%= link_to "Detalhes", researcher_project_path(project.researcher, project), class: 'btn btn-primary btn-sm' %>
+        <% end %>
+        <br/>
+      </div>
+    <% end %>
+  </div>
 </div>

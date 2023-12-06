@@ -1,11 +1,14 @@
 <h2>Cadastro de projeto</h2>
 
 <% if @project.errors.any? %>
-  <ul>
-    <% @project.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
+  <div id="error_explanation" data-turbo-cache="false">
+    <h3><%= I18n.t("errors.messages.not_saved", count: @project.errors.count, resource: @project.class.model_name.human.downcase) %></h3>
+    <ul>
+      <% @project.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 
 <%= form_for [@researcher, @project] do |f| %>
@@ -126,7 +129,7 @@
     <% end %>
   <% end %>
 
-  <div>
-    <%= f.submit 'Realizar cadastro' %>
+  <div class="actions">
+    <%= f.submit 'Realizar cadastro', class: 'btn btn-success' %>
   </div>
 <% end %>

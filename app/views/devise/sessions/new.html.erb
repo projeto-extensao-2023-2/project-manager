@@ -1,4 +1,4 @@
-<div class="login-container">
+
   <h2>Fazer login</h2>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -25,47 +25,4 @@
   <% end %>
 
   <%= render "devise/shared/links" %>
-</div>
 
-<style>
-  .login-container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    margin-top: 50px;
-  }
-
-  .login-container h2 {
-    text-align: center;
-    color: #343a40;
-  }
-
-  .form-field {
-    margin-bottom: 20px;
-  }
-
-  .form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-
-  .form-actions {
-    text-align: center;
-  }
-
-  .btn-primary {
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
-  }
-
-  .btn-primary:hover {
-    background-color: #0056b3;
-  }
-</style>

@@ -1,73 +1,75 @@
-<h2>Cadastro de Coordenador</h2>
+<div class="cute-container">
+  <h2>Cadastro de Coordenador</h2>
 
-<% if @user.errors.any? %>
-  <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= form_for(@user, url: create_coordinator_registration_path) do |f| %>
-  <div>
+  <%= form_for(@user, url: create_coordinator_registration_path, html: { class: "form" }) do |f| %>
     <%= f.fields_for :coordinator do |coordinator_fields| %>
-      <div>
-        <%= coordinator_fields.label :name %>
-        <%= coordinator_fields.text_field :name %>
+      <div class="mb-3">
+        <%= coordinator_fields.label :name, class: "form-label" %>
+        <%= coordinator_fields.text_field :name, class: "form-control" %>
       </div>
 
-      <div>
-        <%= coordinator_fields.label :phone_number %>
-        <%= coordinator_fields.text_field :phone_number %>
+      <div class="mb-3">
+        <%= coordinator_fields.label :phone_number, class: "form-label" %>
+        <%= coordinator_fields.text_field :phone_number, class: "form-control" %>
       </div>
 
-      <div>
-        <%= coordinator_fields.label :academic_field %>
-        <%= coordinator_fields.text_field :academic_field %>
+      <div class="mb-3">
+        <%= coordinator_fields.label :academic_field, class: "form-label" %>
+        <%= coordinator_fields.text_field :academic_field, class: "form-control" %>
       </div>
 
       <%= coordinator_fields.fields_for :address do |address_fields| %>
-        <div>
-          <%= address_fields.label :street %>
-          <%= address_fields.text_field :street %>
+        <div class="mb-3">
+          <%= address_fields.label :street, class: "form-label" %>
+          <%= address_fields.text_field :street, class: "form-control" %>
         </div>
-        <div>
-          <%= address_fields.label :district %>
-          <%= address_fields.text_field :district %>
+        <div class="mb-3">
+          <%= address_fields.label :district, class: "form-label" %>
+          <%= address_fields.text_field :district, class: "form-control" %>
         </div>
-        <div>
-          <%= address_fields.label :complement %>
-          <%= address_fields.text_field :complement %>
+        <div class="mb-3">
+          <%= address_fields.label :complement, class: "form-label" %>
+          <%= address_fields.text_field :complement, class: "form-control" %>
         </div>
-        <div>
-          <%= address_fields.label :postal_code %>
-          <%= address_fields.text_field :postal_code %>
+        <div class="mb-3">
+          <%= address_fields.label :postal_code, class: "form-label" %>
+          <%= address_fields.text_field :postal_code, class: "form-control" %>
         </div>
-        <div>
-          <%= address_fields.label :city %>
-          <%= address_fields.text_field :city %>
+        <div class="mb-3">
+          <%= address_fields.label :city, class: "form-label" %>
+          <%= address_fields.text_field :city, class: "form-control" %>
         </div>
-        <div>
-          <%= address_fields.label :state %>
-          <%= address_fields.text_field :state %>
+        <div class="mb-3">
+          <%= address_fields.label :state, class: "form-label" %>
+          <%= address_fields.text_field :state, class: "form-control" %>
         </div>
       <% end %>
     <% end %>
-  </div>
 
-  <div>
-    <%= f.label :email %>
-    <%= f.email_field :email %>
-  </div>
-  <div>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>
-  <div>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <div>
-    <%= f.submit 'Cadastrar' %>
-  </div>
-<% end %>
+    <div class="mb-3">
+      <%= f.label :email, class: "form-label" %>
+      <%= f.email_field :email, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :password, class: "form-label" %>
+      <%= f.password_field :password, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :password_confirmation, class: "form-label" %>
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= f.submit 'Cadastrar', class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

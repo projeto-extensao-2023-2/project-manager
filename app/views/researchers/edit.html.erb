@@ -1,70 +1,87 @@
-<h1>Editar perfil</h1>
+<div class="cute-container">
+  <h1>Editar perfil</h1>
 
-<% if @researcher.errors.any? %>
-  <p>Verifique os erros abaixo:</p>
-  <ul>
-    <% @researcher.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<%= form_with model: @researcher do |f| %>
-  <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-  <div>
-    <%= f.label :phone_number %>
-    <%= f.text_field :phone_number %>
-  </div>
-  <div>
-    <%= f.label :academic_field %>
-    <%= f.text_field :academic_field %>
-  </div>
-  <div>
-    <%= f.label :cv_link %>
-    <%= f.text_field :cv_link %>
-  </div>
-  <div>
-    <%= f.label :orcid_id %>
-    <%= f.text_field :orcid_id %>
-  </div>
-  <div>
-    <%= f.label :academic_title %>
-    <%= f.text_field :academic_title %>
-  </div>
-
-  <%= f.fields_for :address do |address_fields| %>
-    <div>
-      <%= address_fields.label :street %>
-      <%= address_fields.text_field :street %>
-    </div>
-    <div>
-      <%= address_fields.label :district %>
-      <%= address_fields.text_field :district %>
-    </div>
-    <div>
-      <%= address_fields.label :complement %>
-      <%= address_fields.text_field :complement %>
-    </div>
-    <div>
-      <%= address_fields.label :postal_code %>
-      <%= address_fields.text_field :postal_code %>
-    </div>
-    <div>
-      <%= address_fields.label :city %>
-      <%= address_fields.text_field :city %>
-    </div>
-    <div>
-      <%= address_fields.label :state %>
-      <%= address_fields.text_field :state %>
+  <% if @researcher.errors.any? %>
+    <div class="alert alert-danger">
+      <p>Verifique os erros abaixo:</p>
+      <ul>
+        <% @researcher.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= f.submit 'Salvar alterações' %>
+  <%= form_with model: @researcher do |f| %>
+    <div>
+      <%= f.label :name, class: "form-label" %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+    <div>
+      <%= f.label :phone_number, class: "form-label" %>
+      <%= f.text_field :phone_number, class: "form-control" %>
+    </div>
+    <div>
+      <%= f.label :academic_field, class: "form-label" %>
+      <%= f.text_field :academic_field, class: "form-control" %>
+    </div>
+    <div>
+      <%= f.label :cv_link, class: "form-label" %>
+      <%= f.text_field :cv_link, class: "form-control" %>
+    </div>
+    <div>
+      <%= f.label :orcid_id, class: "form-label" %>
+      <%= f.text_field :orcid_id, class: "form-control" %>
+    </div>
+    <div>
+      <%= f.label :academic_title, class: "form-label" %>
+      <%= f.text_field :academic_title, class: "form-control" %>
+    </div>
 
-    <%= link_to 'Voltar', researcher_path(@researcher) %>
-  </div>
-<% end %>
+    <%= f.fields_for :address do |address_fields| %>
+      <div class="mb-3">
+        <%= address_fields.label :street, class: "form-label" %>
+        <%= address_fields.text_field :street, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= address_fields.label :district, class: "form-label" %>
+        <%= address_fields.text_field :district, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= address_fields.label :complement, class: "form-label" %>
+        <%= address_fields.text_field :complement, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= address_fields.label :postal_code, class: "form-label" %>
+        <%= address_fields.text_field :postal_code, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= address_fields.label :city, class: "form-label" %>
+        <%= address_fields.text_field :city, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= address_fields.label :state, class: "form-label" %>
+        <%= address_fields.text_field :state, class: "form-control" %>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= f.label :email, class: "form-label" %>
+      <%= f.email_field :email, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :password, class: "form-label" %>
+      <%= f.password_field :password, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :password_confirmation, class: "form-label" %>
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= f.submit 'Salvar alterações', class: "btn btn-primary" %>
+    </div>
+    <div>
+      <%= link_to 'Voltar', researcher_path(@researcher), class: "btn btn-secondary" %>
+    </div>
+  <% end %>
+</div>

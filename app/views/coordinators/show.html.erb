@@ -1,27 +1,29 @@
-<h1>Dados do perfil</h1>
+<div class="cute-container">
+  <h2>Dados do perfil</h2>
 
-<div>
-  <p><strong><%= Researcher.human_attribute_name("name") %>: </strong> <%= @coordinator.name %></p>
-</div>
-<div>
-  <p><strong><%= Researcher.human_attribute_name("phone_number") %>: </strong> <%= @coordinator.phone_number %></p>
-</div>
-<div>
-  <p><strong><%= Researcher.human_attribute_name("academic_field") %>: </strong> <%= @coordinator.academic_field %></p>
-</div>
-<div>
-  <p><strong><%= Researcher.human_attribute_name("email") %>: </strong> <%= @coordinator.user.email %></p>
-</div>
-<div>
-  <p><strong><%= Address.model_name.human %>: </strong> <%= @coordinator.address.street %>, <%= @coordinator.address.district %>,
-    <%= @coordinator.address.complement %>, <%= @coordinator.address.city %>-<%= @coordinator.address.state %>,
-    <%= @coordinator.address.postal_code %></p>
-</div>
+  <div class="mb-3">
+    <p><strong><%= Researcher.human_attribute_name("name") %>:</strong> <%= @coordinator.name %></p>
+  </div>
+  <div class="mb-3">
+    <p><strong><%= Researcher.human_attribute_name("phone_number") %>:</strong> <%= @coordinator.phone_number %></p>
+  </div>
+  <div class="mb-3">
+    <p><strong><%= Researcher.human_attribute_name("academic_field") %>:</strong> <%= @coordinator.academic_field %></p>
+  </div>
+  <div class="mb-3">
+    <p><strong><%= Researcher.human_attribute_name("email") %>:</strong> <%= @coordinator.user.email %></p>
+  </div>
+  <div class="mb-3">
+    <p><strong><%= Address.model_name.human %>:</strong> <%= @coordinator.address.street %>, <%= @coordinator.address.district %>,
+      <%= @coordinator.address.complement %>, <%= @coordinator.address.city %>-<%= @coordinator.address.state %>,
+      <%= @coordinator.address.postal_code %></p>
+  </div>
 
-<%= link_to 'Editar', edit_coordinator_path(@coordinator) %>
+  <%= link_to 'Editar', edit_coordinator_path(@coordinator), class: "btn btn-primary" %>
 
-<% if current_user.role == 'supervisor' %>
-  <%= link_to 'Voltar', coordinators_path %>
-<% else %>
-  <%= link_to 'Voltar', root_path %>
-<% end %>
+  <% if current_user.role == 'supervisor' %>
+    <%= link_to 'Voltar', coordinators_path, class: "btn btn-secondary" %>
+  <% else %>
+    <%= link_to 'Voltar', root_path, class: "btn btn-secondary" %>
+  <% end %>
+</div>
